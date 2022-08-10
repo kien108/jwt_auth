@@ -26,12 +26,12 @@ const handleLogin = async (req, res) => {
             },
          },
          process.env.ACCESS_TOKEN_SECRET,
-         { expiresIn: "1m" }
+         { expiresIn: "10s" }
       );
       const newRefreshToken = jwt.sign(
          { username: foundUser.username },
          process.env.REFRESH_TOKEN_SECRET,
-         { expiresIn: "2m" }
+         { expiresIn: "15s" }
       );
 
       // Changed to let keyword
@@ -75,7 +75,6 @@ const handleLogin = async (req, res) => {
       });
 
       // Send authorization roles and access token to user
-      console.log(foundUser);
       res.json({
          accessToken,
          refreshToken: newRefreshToken,

@@ -24,7 +24,7 @@ app.use(logger);
 app.use(credentials);
 
 // Cross Origin Resource Sharing
-app.use(cors());
+app.use(cors({ credentials: true, origin: "https://bv-social-media.vercel.app/" }));
 
 // built-in middleware to handle urlencoded form data
 app.use(express.urlencoded({ extended: false }));
@@ -51,6 +51,7 @@ app.use("/users", require("./routes/api/users"));
 
 app.all("*", (req, res) => {
    res.status(404);
+
    if (req.accepts("html")) {
       res.sendFile(path.join(__dirname, "views", "404.html"));
    } else if (req.accepts("json")) {
